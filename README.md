@@ -10,7 +10,7 @@ Check all, then write your own `config` file.
 
 ## The contents
 
-The following keeps the `SSH` to stop failing if the terminal is kept idle too long.
+Add to the following in the `~/.ssh/config` file to keeps the `SSH` to stop failing if the terminal is kept idle too long.
 ```
 ServerAliveInterval 60
 ```
@@ -31,7 +31,7 @@ Now the `id_rsa_remote1` file needed to be created.
 
 In simple, a pair of `public` and `private` keys are created. The `public` key is then copied to the `remote1` terminal.
 
-Generate the key using,
+Exectue the following in a terminal to generate the key,
 ```
 ssh-keygen -C "my_laptop"
 ```
@@ -68,3 +68,34 @@ ssh-copy-id -i ~/.ssh/id_rsa_remote2 remote2
 ```
 
 It is now done. Do `ssh remote2` or `rsync remote2@/home/myusername/path/to/file .` No need to do it in multiple stages.
+
+### For [github](github.com)
+
+Add the following pieace of code in the `~/.ssh/config` file.
+```
+Host github.com
+     User git
+     IdentityFile ~/.ssh/id_rsa_github
+```
+
+Note the `host` and `user` in this case. Now,
+- Generate the `id_rsa_github` in the same way described above.
+- Copy the content (the `public key`) of `id_rsa_github.pub`. Go to the `Settings->SSH Keys->New SSH Keys` and paste it there.
+- Last word of the `public key` is the `name` of the key (i.e. `my_laptop`). If you keep the `title` field empty, github would automaticlly take the `name`.
+
+All set, you may now do `push` or `pull` without any headache.
+
+
+## Extra: if you need to access internet via the host
+
+Execute the following in a terminal to create `SOCKS` tunnel through `SSH`. This is also called dynamic port forwarding.
+```
+ssh -N -D 9050 remote1
+```
+
+Then in the browser, change the SOCKS settings to the following
+```
+SOCKS host : 127.0.0.1 port : 9050 SOCKSv5
+```
+
+Now internet should work thought `SSH`.

@@ -1,0 +1,26 @@
+
+# The following is the Content of the file .ssh/config
+# Create the file if not present
+
+# This command will keep the terminal alive if kept unattended
+ServerAliveInterval 60
+
+# For public host or in private network
+Host remote1
+     User myusername
+     Hostname host.public.ip.or.url
+     IdentityFile ~/.ssh/id_rsa_remote1
+
+# For private host connecting via a public host
+Host remote2
+     User myotherusername
+     Hostname host.private.ip.or.url
+     IdentityFile ~/.ssh/id_rsa_remote2
+     ProxyJump remote1
+
+
+# For github
+Host github.com
+     User git
+     IdentityFile ~/.ssh/id_rsa_github
+
