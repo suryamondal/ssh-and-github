@@ -66,3 +66,5 @@ Then, copy the `public` key to the `remote2` using the following key.
 ```
 ssh-copy-id -i ~/.ssh/id_rsa_remote2 remote2
 ```
+
+It is now done. Do `ssh remote2` or `rsync remote2@/home/myusername/path/to/file .` No need to do it in multiple stages.
