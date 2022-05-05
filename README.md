@@ -2,7 +2,7 @@
 
 The file `~/.ssh/config` contains the required information for the `SSH` to operate smoothly.
 
-One easy way to `ssh` to a `private` terminal via a `public` terminal, is also given here. No need to go through multiple logins.
+One easy way to `ssh` to a `private` terminal via a `public` terminal, is also given here. In this way, there is no need to go through multiple logins.
 
 The `push` or `pull` to [github](github.com) is a bit different.
 
@@ -10,13 +10,14 @@ Check all, then write your own `config` file.
 
 ## The contents
 
-The following keeps the `SSH` to stop failing if the terminal kept idle too long.
+The following keeps the `SSH` to stop failing if the terminal is kept idle too long.
 ```
 ServerAliveInterval 60
 ```
 
-### The following is the way to `ssh` to `public` terminal:
+### The following is the way to `ssh` to a `public` terminal:
 
+The following pieace of code goes in the `~/.ssh/config` file.
 ```
 Host remote1
      User myusername
@@ -38,14 +39,15 @@ Give the `path/to/file` as `~/.ssh/id_rsa_remote1`.
 
 *Note*: Never keep the passphrase empty. Keep it different than the `ssh user password`.
 
-Now, copy the `public` key to the `remote1` using the following key.
+Now, copy the `public` key to the `remote1` using the following command.
 ```
 ssh-copy-id -i ~/.ssh/id_rsa_remote1 remote1
 ```
 It may ask user password multiple times, don't worry.
 
-### The following is the way to `ssh` to `private` terminal via `public` termina:
+### The following is the way to `ssh` to a `private` terminal via `public` termina:
 
+Add the following pieace of code in the `~/.ssh/config` file.
 ```
 Host remote2
      User myotherusername
