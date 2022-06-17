@@ -69,7 +69,7 @@ ssh-copy-id -i ~/.ssh/id_rsa_remote2 remote2
 
 It is now done. Do `ssh remote2` or `rsync remote2@/home/myusername/path/to/file .` No need to do it in multiple stages.
 
-### For [github](github.com)
+### For [GitHub](github.com) or [GitLab](gitlab.com) or [BitBucket](bitbucket.org)
 
 Add the following pieace of code in the `~/.ssh/config` file.
 ```
@@ -82,6 +82,16 @@ Note the `host` and `user` in this case. Now,
 - Generate the `id_rsa_github` in the same way described above.
 - Copy the content (the `public key`) of `id_rsa_github.pub`. Go to the `Settings->SSH Keys->New SSH Keys` and paste it there.
 - Last word of the `public key` is the `name` of the key (i.e. `my_laptop`). If you keep the `title` field empty, github would automaticlly take the `name`.
+
+### If Bitbucket returns the following after an update to OpenSSH 8.8:
+```
+Unable to negotiate with <ip address> port <port number>: no matching host key type found. Their offer: ssh-rsa,ssh-dss
+```
+then add the following in the `config` file following `IdentityFile ....`.
+```
+     HostKeyAlgorithms +ssh-rsa
+     PubkeyAcceptedKeyTypes +ssh-rsa
+```
 
 All set, you may now do `push` or `pull` without any headache.
 
