@@ -113,4 +113,4 @@ Then in the browser, change the SOCKS settings to the following
 SOCKS host : 127.0.0.1 port : 9050 SOCKSv5
 ```
 
-Now internet should work thought `SSH`.
+Now internet should work through `SSH`.
