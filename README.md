@@ -2,8 +2,9 @@
 
 The file `~/.ssh/config` contains the required information for the `SSH` to operate smoothly.
 This file helps
-- to `push or pull` from a remote repository
+- to establish `ssh` or `rsync` without typing password every time
 - to establish `ssh` or `rsync` from `A` to `B` via `A->C->D->B` in one step
+- to `push or pull` from a remote repository
 
 Check all, then write your own `config` file. A sample `config` file also can be found in this
 repository.
@@ -18,7 +19,7 @@ Add the following in the `~/.ssh/config` file.
 ServerAliveInterval 60
 ```
 
-### The way to `ssh` to a `public` terminal:
+### Establish `ssh` to a `public` terminal:
 
 The following piece of code goes in the `~/.ssh/config` file.
 ```
@@ -51,6 +52,7 @@ It may ask user password multiple times, don't worry.
 After this, whenever you do `ssh` to `remote1`, it should not ask for ssh user password. You need to provide the `ssh passphrase` once after rebooting the terminal.
 
 ### Establish `ssh` to a `private` terminal via `public` terminal:
+*local->remote1->remote2*
 
 Add the following piece of code in the `~/.ssh/config` file.
 ```
