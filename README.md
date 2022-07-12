@@ -1,23 +1,26 @@
-# SSH Keys
+# SSH Configuration File
 
 The file `~/.ssh/config` contains the required information for the `SSH` to operate smoothly.
+This file helps
+- to `push or pull` from a remote repository
+- to establish `ssh` or `rsync` from `A` to `B` via `A->C->D->B` in one step
 
-One easy way to `ssh` to a `private` terminal via a `public` terminal, is also given here. In this way, there is no need to go through multiple logins.
+Check all, then write your own `config` file. A sample `config` file also can be found in this
+repository.
 
-The `push` or `pull` to [github](github.com) is a bit different.
+## The contents of `config`
+### Keeping `ssh` alive for long time
 
-Check all, then write your own `config` file.
+*Is you `ssh` keep failing when kept idle for long??* The solution is here.
 
-## The contents
-
-Add to the following in the `~/.ssh/config` file to keeps the `SSH` to stop failing if the terminal is kept idle too long.
+Add the following in the `~/.ssh/config` file.
 ```
 ServerAliveInterval 60
 ```
 
-### The following is the way to `ssh` to a `public` terminal:
+### The way to `ssh` to a `public` terminal:
 
-The following pieace of code goes in the `~/.ssh/config` file.
+The following piece of code goes in the `~/.ssh/config` file.
 ```
 Host remote1
      User myusername
@@ -27,11 +30,11 @@ Host remote1
 
 The point of all of this is that one can just `ssh remote1`, instead of `ssh myusername@host.public.ip.or.url`.
 
-Now the `id_rsa_remote1` file needed to be created.
+Now the ` ~/.ssh/id_rsa_remote1` file needed to be created.
 
 In simple, a pair of `public` and `private` keys are created. The `public` key is then copied to the `remote1` terminal.
 
-Exectue the following in a terminal to generate the key,
+Execute the following in a terminal to generate the key,
 ```
 ssh-keygen -C "my_laptop"
 ```
@@ -47,9 +50,9 @@ It may ask user password multiple times, don't worry.
 
 After this, whenever you do `ssh` to `remote1`, it should not ask for ssh user password. You need to provide the `ssh passphrase` once after rebooting the terminal.
 
-### The following is the way to `ssh` to a `private` terminal via `public` termina:
+### Establish `ssh` to a `private` terminal via `public` terminal:
 
-Add the following pieace of code in the `~/.ssh/config` file.
+Add the following piece of code in the `~/.ssh/config` file.
 ```
 Host remote2
      User myotherusername
@@ -67,11 +70,11 @@ Then, copy the `public` key to the `remote2` using the following key.
 ssh-copy-id -i ~/.ssh/id_rsa_remote2 remote2
 ```
 
-It is now done. Do `ssh remote2` or `rsync remote2@/home/myusername/path/to/file .` No need to do it in multiple stages.
+It is now done. Do `ssh remote2` or `rsync remote2:/home/myusername/path/to/file .` No need to do it in multiple stages.
 
-### For [GitHub](github.com) or [GitLab](gitlab.com) or [BitBucket](bitbucket.org)
+### For [GitHub](github.com) ( or [GitLab](gitlab.com) or [BitBucket](bitbucket.org))
 
-Add the following pieace of code in the `~/.ssh/config` file.
+Add the following piece of code in the `~/.ssh/config` file.
 ```
 Host github.com
      User git
@@ -81,7 +84,7 @@ Host github.com
 Note the `host` and `user` in this case. Now,
 - Generate the `id_rsa_github` in the same way described above.
 - Copy the content (the `public key`) of `id_rsa_github.pub`. Go to the `Settings->SSH Keys->New SSH Keys` and paste it there.
-- Last word of the `public key` is the `name` of the key (i.e. `my_laptop`). If you keep the `title` field empty, github would automaticlly take the `name`.
+- Last word of the `public key` is the `name` of the key (i.e. `my_laptop`). If you keep the `title` field empty, github would automatically take the `name`.
 
 ### If Bitbucket returns the following after an update to OpenSSH 8.8:
 ```
