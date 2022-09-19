@@ -83,10 +83,11 @@ Host github.com
      IdentityFile ~/.ssh/id_rsa_github
 ```
 
-Note the `host` and `user` in this case. Now,
+Note the `user` in this case, it is not the github `username`. Now,
 - Generate the `id_rsa_github` in the same way described above.
 - Copy the content (the `public key`) of `id_rsa_github.pub`. Go to the `Settings->SSH Keys->New SSH Keys` and paste it there.
 - Last word of the `public key` is the `name` of the key (i.e. `my_laptop`). If you keep the `title` field empty, github would automatically take the `name`.
+- Test the connection now by using `ssh -T git@github.com`.
 
 ### If Bitbucket returns the following after an update to OpenSSH 8.8:
 ```
