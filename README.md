@@ -39,7 +39,7 @@ Execute the following in a terminal to generate the key,
 ```
 ssh-keygen -C "my_laptop"
 ```
-Give the `path/to/file` as `/home/username/.ssh/id_rsa_remote1`. **Give the full name. It does not resolve `~`**
+Give the `path/to/file` as `/home/username/.ssh/id_rsa_remote1`. **Give the full name. It does not resolve `~`.**
 
 *Note*: Never keep the passphrase empty. Keep it different than the `ssh user password`.
 
